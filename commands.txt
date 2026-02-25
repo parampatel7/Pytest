@@ -1,0 +1,100 @@
+✅ PYTEST COMMANDS – QUICK REFERENCE
+
+📁 PROJECT STRUCTURE
+project/
+│
+├── tests/
+│   ├── test_login.py
+│   ├── test_signup.py
+│   └── api/
+│       └── test_users.py
+
+📁 RUN BY FOLDER
+▶ Run all tests in a folder
+python3 -m pytest tests/
+
+▶ Run tests in a subfolder
+python3 -m pytest tests/api/
+
+
+📄 RUN BY FILE
+▶ Run one file
+python3 -m pytest tests/test_login.py
+
+▶ Run one file with print statement
+python3 -m pytest -s
+
+▶ Run multiple files
+python3 -m pytest tests/test_login.py tests/test_signup.py
+
+
+🎯 RUN ONE TEST FUNCTION
+python3 -m pytest tests/test_login.py::test_valid_login
+
+
+🏛 RUN ONE TEST CLASS
+python3 -m pytest tests/test_login.py::TestLogin
+
+
+🧪 RUN ONE TEST INSIDE A CLASS
+python3 -m pytest tests/test_login.py::TestLogin::test_valid_login
+
+
+🔢 RUN ONE PARAMETRIZED TEST CASE
+If test is:
+@pytest.mark.parametrize("num", [1, 2, 3])
+def test_number(num):
+    ...
+
+▶ Run only case 2
+python3 -m pytest tests/test_login.py::test_number[2]
+
+
+🔍 RUN BY NAME PATTERN (Keyword)
+▶ Run tests containing "login"
+python3 -m pytest -k login
+
+▶ Run multiple keywords
+python3 -m pytest -k "login or signup"
+
+▶ Exclude keyword
+python3 -m pytest -k "not slow"
+
+
+🏷 RUN BY MARKER
+If test is marked:
+@pytest.mark.slow
+def test_big():
+    ...
+
+▶ Run marked tests
+python3 -m pytest -m slow
+
+▶ Run multiple markers
+python3 -m pytest -m "slow and api"
+
+
+❌ RUN LAST FAILED TESTS
+▶ Run only last failed
+python3 -m pytest --lf
+
+▶ Run failed first
+python3 -m pytest --ff
+
+
+⛔ STOP AFTER FIRST FAILURE
+python3 -m pytest -x
+
+
+🧾 SEE ALL COLLECTED TESTS (Get Exact Node ID)
+python3 -m pytest --collect-only -q
+
+
+🧠 MEMORY RULE (Quick Pattern Guide)
+What You Want        Command Pattern
+-----------------------------------------------
+Folder               python3 -m pytest folder/
+File                 python3 -m pytest file.py
+Test function        python3 -m pytest file.py::test_name
+Class                python3 -m pytest file.py::ClassName
+Test in class        python3 -m pytest file.py::ClassName::test_name

@@ -1,0 +1,21 @@
+from datetime import datetime
+
+class Studentz:  
+    def __init__(self, name, dob, branch):
+        self.name = name
+        self.dob= dob
+        self.branch = branch
+        self.credits = 0
+
+    def get_age(self):
+        return (datetime.now() - self.dob).days 
+    
+    def add_credits(self, value):
+        self.credits += value
+    
+    def get_credits(self):
+        return self.credits
+    
+
+
+#Use python3 -m pytest -v -s

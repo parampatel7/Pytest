@@ -1,0 +1,40 @@
+pytest.approx()
+
+pyest.raises(ZeroDivisionError, RuntimeError, NotImplementedError, ValueError, IndexError)
+pytest.RaisesGroup(ValueError, TypeError)
+
+subtests
+
+--lf, --last-failed - to only re-run the failures.
+--ff, --failed-first - to run the failures first and then the rest of the tests.
+
+pytest -x           # stop after first failure
+pytest --maxfail=2  # stop after two failures
+
+Python comes with a builtin Python debugger called pdb. pytest allows one to drop into the pdb prompt via a command line option:
+pytest --pdb
+This will invoke the Python debugger on every failure (or KeyboardInterrupt). 
+Often you might only want to do this for the first failing test to understand a certain failure situation:
+pytest -x --pdb   # drop to PDB on first failure, then end test session
+pytest --pdb --maxfail=3  # drop to PDB for first three failures
+
+pytest allows one to drop into the pdb prompt immediately at the start of each test via a command line option:
+pytest --trace
+This will invoke the Python debugger at the start of every test.
+
+To set a breakpoint in your code use the native Python import pdb;pdb.set_trace() call in your code and pytest automatically disables its output capture for that test:
+    Output capture in other tests is not affected.
+    Any prior test output that has already been captured and will be processed as such.
+    Output capture gets resumed when ending the debugger session (via the continue command).
+
+
+Python 3.7 introduces a builtin breakpoint() function. Pytest supports the use of breakpoint() with the following behaviours:
+    
+        When breakpoint() is called and PYTHONBREAKPOINT is set to the default value, pytest will use the custom internal PDB trace UI instead of the system default Pdb.
+        When tests are complete, the system will default back to the system Pdb trace UI.
+        With --pdb passed to pytest, the custom internal Pdb trace UI is used with both breakpoint() and failed tests/unhandled exceptions.
+        --pdbcls can be used to specify a custom debugger class.
+
+Link: https://docs.pytest.org/en/stable/how-to/output.html
+
+s
